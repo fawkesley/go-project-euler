@@ -8,6 +8,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/paulfurley/go-project-euler/primeutil"
 	"math"
 )
 
@@ -19,7 +20,7 @@ func main() {
 
 func findLargestPrimeFactor(target int) int {
 	for i := (int)(math.Sqrt((float64)(target)) + 1); i > 0; i-- {
-		if isFactor(target, i) && isPrime(i) {
+		if isFactor(target, i) && primeutil.IsPrime(i) {
 			return i
 		}
 	}
@@ -29,14 +30,4 @@ func findLargestPrimeFactor(target int) int {
 
 func isFactor(x, potential int) bool {
 	return x%potential == 0
-}
-
-func isPrime(candidate int) bool {
-	// Test from 2 -> sqrt for a factor
-	for i, sqrt := 2, int(1+math.Sqrt((float64)(candidate))); i < sqrt; i++ {
-		if candidate%i == 0 {
-			return false
-		}
-	}
-	return true
 }
